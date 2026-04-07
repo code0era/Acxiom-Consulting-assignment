@@ -35,6 +35,12 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/vendor', vendorRoutes);
 app.use('/api/user', userRoutes);
 
+// Mount duplicate routes without '/api' for Vercel's routePrefix stripping
+app.use('/auth', authRoutes);
+app.use('/admin', adminRoutes);
+app.use('/vendor', vendorRoutes);
+app.use('/user', userRoutes);
+
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ message: 'Something went wrong!', error: err.message });
